@@ -22,10 +22,7 @@ const getSingleCategory = async (req, res) => {
   //#swagger.tags=["Categories"]
   try {
     const id = req.params.id;
-    if (!ObjectId.isValid(id)) {
-      res.status(400).json({ message: "Invalid category ID" });
-    }
-    const categoryId = new ObjectId(req.params.id);
+   
     const result = await mongodb
       .getDatabase()
       .collection("categories")
@@ -77,20 +74,21 @@ const createCategory = async (req, res) => {
 //Function to update category
 const updateCategory = async (req, res) => {
   //#swagger.tags=["Categories"]
-  try {
+    try {
+      const id = req.params.id
     const category = {
       name: req.body.name,
       description: req.body.description,
     };
     const response = await mongodb
       .getDatabase()
-      .collection("categories")
-      .replaceOne({ _id: req.params.id }, category);
+        .collection("categories")
+        .replaceOne({ _id: id }, category);
 
     if (response.matchedCount === 0) {
       return res.status(404).json({ message: "category not found" });
     }
-    res.status(200).json({ message: "category updated successfully" });
+   return res.status(200).json({ message: "category updated successfully" });
   } catch (error) {
     console.error(error);
     return res.status(500).json(error.message || "Server error");

@@ -22,10 +22,7 @@ const getSingleOrder = async (req, res) => {
   //#swagger.tags=["Orders"]
   try {
     const id = req.params.id;
-    if (!ObjectId.isValid(id)) {
-      res.status(400).json({ message: "Invalid orders ID" });
-    }
-    const ordersId = new ObjectId(req.params.id);
+    
     const result = await mongodb
       .getDatabase()
       .collection("orders")

@@ -21,11 +21,8 @@ const getAllProducts = async (req, res) => {
 const getSingleProduct = async (req, res) => {
   //#swagger.tags=["Products"]
   try {
-    const id = req.params.id;
-    if (!ObjectId.isValid(id)) {
-      res.status(400).json({ message: "Invalid product ID" });
-    }
-    const productId = new ObjectId(req.params.id);
+      const id = req.params.id;
+      
     const result = await mongodb
       .getDatabase()
       .collection("products")

@@ -10,7 +10,7 @@ const initDb = (callback) => {
   mongoClient
     .connect(process.env.MONGODB_URL)
     .then((client) => {
-      database = client.db("school");
+      database = client.db("e-commerce");
       callback(null, database);
     })
     .catch((err) => {

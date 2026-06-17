@@ -17,11 +17,9 @@ const getAllUsers = async (req, res) => {
 //Function to get single user
 const getSingleUser = async (req, res) => {
   //#swagger.tags=["Users"]
-  try {
-    if (!ObjectId.isValid(req.params.id)) {
-      return res.status(400).json({ message: "Invalid user ID" });
-    }
-    const userId = new ObjectId(req.params.id);
+    try {
+        const userId = req.params.id;
+        
     const user = await mongodb
       .getDatabase()
       .collection("users")
@@ -50,7 +48,7 @@ const createUser = async (req, res) => {
     !req.body.role ||
     !req.body.registrationDate
     ) {
-      res.status(400).json({ message: "All fields are required!" });
+      return res.status(400).json({ message: "All fields are required!" });
     }
     const user = {
       firstName: req.body.firstName,
@@ -67,12 +65,11 @@ const createUser = async (req, res) => {
       .insertOne(user);
 
     if (response.acknowledged) {
-      res.status(201).send("User created successfully");
+      return res.status(201).send("User created successfully");
     }
   } catch (error) {
-    res
-      .status(500)
-      .json(response.error || "Some error occurred while updating user");
+      console.error(error)
+    res.status(500).json(error.message || "Some error occurred while updating user");
   }
 };
 
@@ -111,25 +108,21 @@ const updateUser = async (req, res) => {
 //Function to delete user
 const deleteUser = async (req, res) => {
   //#swagger.tags=["Users"]
-  try {
-    if (!ObjectId.isValid(req.params.id)) {
-      return res.status(400).json({ message: "Invalid user ID" });
-    }
-    const userId = new ObjectId(req.params.id);
+    try {
+      const userId = req.params.id
+    
     const response = await mongodb
       .getDatabase()
       .collection("users")
       .deleteOne({ _id: userId });
 
     if (response.deletedCount === 0) {
-      res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "User not found" });
     }
     res.status(200).json({ message: "User deleted successfully" });
   } catch (error) {
     console.error(error);
-    res
-      .status(500)
-      .json(response.error || "Some error occurred while deleting user");
+   return res.status(500).json(error.message || "Some error occurred while deleting user");
   }
 };
 
