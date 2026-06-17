@@ -47,20 +47,24 @@ const createProduct = async (req, res) => {
   //#swagger.tags=["Products"]
   try {
     if (
-      !req.body.productName ||
-      !req.body.description ||
-      !req.body.durationWeeks ||
-      !req.body.level ||
-      !req.body.fee
+    !req.body.name ||
+    !req.body.description ||
+    !req.body.categoryId ||
+    !req.body.price ||
+    !req.body.stockQuantity ||
+    !req.body.brand ||
+    !req.body.createDate 
     ) {
       return res.status(400).json({ message: "All fields required" });
     }
     const createProduct = {
-      productName: req.body.productName,
+      name: req.body.name,
       description: req.body.description,
-      durationWeeks: req.body.durationWeeks,
-      level: req.body.level,
-      fee: req.body.fee,
+      categoryId: req.body.categoryId,
+      price: req.body.price,
+        stockQuantity: req.body.stockQuantity,
+        brand: req.body.brand,
+      createDate: req.body.createDate
     };
     const result = await mongodb
       .getDatabase()
@@ -83,11 +87,13 @@ const updateProduct = async (req, res) => {
   //#swagger.tags=["Products"]
   try {
     const product = {
-      productName: req.body.productName,
+      name: req.body.name,
       description: req.body.description,
-      durationWeeks: req.body.durationWeeks,
-      level: req.body.level,
-      fee: req.body.fee,
+      categoryId: req.body.categoryId,
+      price: req.body.price,
+      stockQuantity: req.body.stockQuantity,
+      brand: req.body.brand,
+      createDate: req.body.createDate,
     };
     const response = await mongodb
       .getDatabase()

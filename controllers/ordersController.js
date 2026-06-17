@@ -47,20 +47,20 @@ const createOrder = async (req, res) => {
   //#swagger.tags=["Orders"]
   try {
     if (
-      !req.body.ordersName ||
-      !req.body.description ||
-      !req.body.durationWeeks ||
-      !req.body.level ||
-      !req.body.fee
+      !req.body.userId ||
+      !req.body.products ||
+      !req.body.totalAmount ||
+      !req.body.status ||
+      !req.body.orderDate
     ) {
       return res.status(400).json({ message: "All fields required" });
     }
     const createOrder = {
-      ordersName: req.body.ordersName,
-      description: req.body.description,
-      durationWeeks: req.body.durationWeeks,
-      level: req.body.level,
-      fee: req.body.fee,
+      userId: req.body.userId,
+      products: req.body.products,
+      totalAmount: req.body.totalAmount,
+      status: req.body.status,
+      orderDate: req.body.orderDate,
     };
     const result = await mongodb
       .getDatabase()
@@ -83,11 +83,11 @@ const updateOrder = async (req, res) => {
   //#swagger.tags=["orders"]
   try {
     const order = {
-      ordersName: req.body.ordersName,
-      description: req.body.description,
-      durationWeeks: req.body.durationWeeks,
-      level: req.body.level,
-      fee: req.body.fee,
+      userId: req.body.userId,
+      products: req.body.products,
+      totalAmount: req.body.totalAmount,
+      status: req.body.status,
+      orderDate: req.body.orderDate,
     };
     const response = await mongodb
       .getDatabase()

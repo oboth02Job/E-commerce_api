@@ -10,6 +10,9 @@ const cors = require("cors");
 const mongodb = require("./data/database");
 
 
+app.use(cors)
+app.use(express.json())
+
 app.use("/", (req, res) => {
 res.send("Hello from the server")
 })
@@ -19,6 +22,12 @@ app.use("/orders", require("./routes/ordersRoutes"));
 app.use("/products", require("./routes/productsRoutes"));
 app.use("/users", require("./routes/usersRoutes"));
 
-app.listen(port, () => {
-    console.log(`Server running on port: ${port}`)
+mongodb.initDb((err) => {
+  if (err) {
+    console.log(err);
+  } else {
+    app.listen(port, () => {
+      console.log(`The server is running on port: ${port}`);
+    });
+  }
 });

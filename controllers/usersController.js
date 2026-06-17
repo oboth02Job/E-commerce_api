@@ -42,20 +42,24 @@ const createUser = async (req, res) => {
   //#swagger.tags=["Users"]
   try {
     if (
-      (!req.body.name,
-      !req.body.email,
-      !req.body.password,
-      !req.body.phone,
-      !req.body.country)
+    !req.body.firstName ||
+    !req.body.lastName ||
+    !req.body.email ||
+    !req.body.phoneNumber ||
+    !req.body.password ||
+    !req.body.role ||
+    !req.body.registrationDate
     ) {
       res.status(400).json({ message: "All fields are required!" });
     }
     const user = {
-      name: req.body.name,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
       email: req.body.email,
+      phoneNumber: req.body.phoneNumber,
       password: req.body.password,
-      phone: req.body.phone,
-      country: req.body.country,
+      role: req.body.role,
+      registrationDate: req.body.registrationDate
     };
     const response = await mongodb
       .getDatabase()
@@ -81,11 +85,13 @@ const updateUser = async (req, res) => {
     }
     const userId = new ObjectId(req.params.id);
     const user = {
-      name: req.body.name,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
       email: req.body.email,
+      phoneNumber: req.body.phoneNumber,
       password: req.body.password,
-      phone: req.body.phone,
-      country: req.body.country,
+      role: req.body.role,
+      registrationDate: req.body.registrationDate,
     };
     const response = await mongodb
       .getDatabase()

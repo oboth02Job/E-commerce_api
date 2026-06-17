@@ -47,25 +47,21 @@ const createCategory = async (req, res) => {
   //#swagger.tags=["Categories"]
   try {
     if (
-      !req.body.categoryName ||
-      !req.body.description ||
-      !req.body.durationWeeks ||
-      !req.body.level ||
-      !req.body.fee
+      !req.body.name ||
+      !req.body.description 
+      
     ) {
       return res.status(400).json({ message: "All fields required" });
     }
-    const createAcategory = {
-      categoryName: req.body.categoryName,
+    const createCategory = {
+      name: req.body.name,
       description: req.body.description,
-      durationWeeks: req.body.durationWeeks,
-      level: req.body.level,
-      fee: req.body.fee,
+      
     };
     const result = await mongodb
       .getDatabase()
       .collection("categories")
-      .insertOne(createAcategory);
+      .insertOne(createCategory);
     if (!result.acknowledged) {
       return res.status(500).json({ message: "category could not be created!" });
     }
@@ -83,11 +79,8 @@ const updateCategory = async (req, res) => {
   //#swagger.tags=["Categories"]
   try {
     const category = {
-      categoryName: req.body.categoryName,
+      name: req.body.name,
       description: req.body.description,
-      durationWeeks: req.body.durationWeeks,
-      level: req.body.level,
-      fee: req.body.fee,
     };
     const response = await mongodb
       .getDatabase()
