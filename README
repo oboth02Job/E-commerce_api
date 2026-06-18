@@ -9,4 +9,4 @@
 - Created MongoDB collections
 - Tested endpoints
 - Implemented 0oath to authenticate protected routes
-- Wrote unit testing with jest
+- Wrote unit testing with jest.
