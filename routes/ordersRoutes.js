@@ -6,7 +6,7 @@ router.get("/", ordersController.getAllOrders);
 router.get("/:id", ordersController.getSingleOrder);
 router.post("/", ordersController.createOrder);
 router.put("/:id", ordersController.updateOrder);
-router.delete(":id", ordersController.deleteOrder);
+router.delete("/:id", ordersController.deleteOrder);
 
 
 

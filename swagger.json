@@ -5,10 +5,10 @@
     "description": "Users Api",
     "version": "1.0.0"
   },
-  "host": "e-commerce-api-w1th.onrender.com",
+  "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/": {
@@ -183,6 +183,49 @@
         }
       }
     },
+    "/auth/github": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/profile": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/auth/github/callback": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api-docs/": {
       "get": {
         "description": "",
@@ -308,9 +351,7 @@
             "description": "Internal Server Error"
           }
         }
-      }
-    },
-    "/{categoriesid}": {
+      },
       "delete": {
         "tags": [
           "Categories"
@@ -318,7 +359,7 @@
         "description": "",
         "parameters": [
           {
-            "name": "categoriesid",
+            "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
@@ -470,9 +511,7 @@
             "description": "Internal Server Error"
           }
         }
-      }
-    },
-    "/{ordersid}": {
+      },
       "delete": {
         "tags": [
           "Orders"
@@ -480,7 +519,7 @@
         "description": "",
         "parameters": [
           {
-            "name": "ordersid",
+            "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
@@ -644,9 +683,7 @@
             "description": "Internal Server Error"
           }
         }
-      }
-    },
-    "/{productsid}": {
+      },
       "delete": {
         "tags": [
           "Products"
@@ -654,7 +691,7 @@
         "description": "",
         "parameters": [
           {
-            "name": "productsid",
+            "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
